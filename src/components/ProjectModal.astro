@@ -35,7 +35,7 @@
 	.modal-backdrop {
 		position: absolute;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.85);
+		background: rgba(0, 0, 0, 0.9);
 	}
 
 	.modal-container {
@@ -43,11 +43,12 @@
 		width: 90%;
 		max-width: 700px;
 		max-height: 90vh;
-		background: #1a1a1a;
-		color: #fff;
+		background: var(--bg);
+		color: var(--text);
 		overflow: hidden;
 		transform: translateY(20px);
 		transition: transform 0.3s;
+		border: 1px solid var(--dot-inactive);
 	}
 
 	.modal[aria-hidden="false"] .modal-container {
@@ -112,17 +113,17 @@
 	}
 
 	#modal-content :global(.icon-link) {
-		color: #94a3b8;
+		color: var(--text-muted);
 		transition: color 0.2s;
 	}
 
 	#modal-content :global(.icon-link:hover) {
-		color: #fff;
+		color: var(--text);
 	}
 
 	#modal-content :global(.modal-subtitle) {
 		font-size: 1rem;
-		color: #94a3b8;
+		color: var(--text-muted);
 		margin: 0;
 	}
 
@@ -135,8 +136,8 @@
 
 	#modal-content :global(.tech-tag) {
 		font-size: 0.75rem;
-		color: #fff;
-		background: #4a5568;
+		color: var(--bg);
+		background: var(--text-muted);
 		padding: 0.25rem 0.75rem;
 		border-radius: 2px;
 	}
@@ -144,25 +145,26 @@
 	#modal-content :global(.modal-content) {
 		margin-top: 1.5rem;
 		padding-top: 1.5rem;
-		border-top: 1px solid #333;
+		border-top: 1px solid var(--dot-inactive);
 	}
 
 	#modal-content :global(.modal-content p) {
 		font-size: 0.95rem;
 		line-height: 1.7;
-		color: #d1d5db;
+		color: var(--text-subtle);
 		margin-bottom: 1rem;
 	}
 
 	#modal-content :global(.modal-content a) {
-		color: #60a5fa;
+		color: var(--text);
+		border-bottom: 1px solid var(--border);
 	}
 
 	#modal-content :global(.modal-content ul),
 	#modal-content :global(.modal-content ol) {
 		margin: 1rem 0;
 		padding-left: 1.5rem;
-		color: #d1d5db;
+		color: var(--text-subtle);
 	}
 
 	#modal-content :global(.modal-content li) {
@@ -175,7 +177,7 @@
 	}
 
 	#modal-content :global(.modal-content code) {
-		background: #2d3748;
+		background: var(--card-bg);
 		padding: 0.2rem 0.4rem;
 		border-radius: 3px;
 		font-size: 0.85rem;

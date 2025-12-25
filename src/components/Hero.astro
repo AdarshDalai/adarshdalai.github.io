@@ -37,7 +37,7 @@ const {
 
 	.greeting {
 		font-size: clamp(0.875rem, 2vw, 1.125rem);
-		color: #666;
+		color: var(--text-muted);
 		margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
 		font-weight: 400;
 	}
@@ -52,7 +52,7 @@ const {
 
 	.tagline {
 		font-size: clamp(1rem, 3vw, 1.5rem);
-		color: #555;
+		color: var(--text-subtle);
 		margin-bottom: clamp(1.5rem, 5vw, 3rem);
 		line-height: 1.5;
 	}
@@ -65,10 +65,10 @@ const {
 	}
 
 	.social-links a {
-		color: #111;
+		color: var(--text);
 		text-decoration: none;
 		font-size: clamp(0.875rem, 2vw, 1.1rem);
-		border-bottom: 1px solid #111;
+		border-bottom: 1px solid var(--border);
 		padding-bottom: 2px;
 		transition: opacity 0.2s;
 	}

@@ -18,16 +18,16 @@ const { email } = Astro.props;
 <style>
 	.contact :global(p) {
 		font-size: clamp(0.95rem, 2.5vw, 1.25rem);
-		color: #444;
+		color: var(--text-subtle);
 		margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
 		line-height: 1.7;
 	}
 
 	.contact :global(a),
 	.contact a {
-		color: #111;
+		color: var(--text);
 		text-decoration: none;
-		border-bottom: 1px solid #111;
+		border-bottom: 1px solid var(--border);
 		transition: opacity 0.2s;
 	}
 
