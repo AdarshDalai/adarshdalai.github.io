@@ -32,40 +32,42 @@ const {
 
 <style>
 	.hero {
-		margin-bottom: 4rem;
+		text-align: center;
 	}
 
 	.greeting {
-		font-size: 0.875rem;
+		font-size: clamp(0.875rem, 2vw, 1.125rem);
 		color: #666;
-		margin-bottom: 0.5rem;
+		margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
 		font-weight: 400;
 	}
 
 	h1 {
-		font-size: 2.5rem;
+		font-size: clamp(2rem, 8vw, 5rem);
 		font-weight: 700;
-		letter-spacing: -0.02em;
-		margin-bottom: 1rem;
-		line-height: 1.2;
+		letter-spacing: -0.03em;
+		margin-bottom: clamp(1rem, 3vw, 2rem);
+		line-height: 1.1;
 	}
 
 	.tagline {
-		font-size: 1.125rem;
-		color: #444;
-		margin-bottom: 1.5rem;
+		font-size: clamp(1rem, 3vw, 1.5rem);
+		color: #555;
+		margin-bottom: clamp(1.5rem, 5vw, 3rem);
+		line-height: 1.5;
 	}
 
 	.social-links {
 		display: flex;
-		gap: 1.25rem;
+		justify-content: center;
+		gap: clamp(1rem, 3vw, 2.5rem);
 		flex-wrap: wrap;
 	}
 
 	.social-links a {
 		color: #111;
 		text-decoration: none;
-		font-size: 0.9rem;
+		font-size: clamp(0.875rem, 2vw, 1.1rem);
 		border-bottom: 1px solid #111;
 		padding-bottom: 2px;
 		transition: opacity 0.2s;
@@ -73,15 +75,5 @@ const {
 
 	.social-links a:hover {
 		opacity: 0.6;
-	}
-
-	@media (max-width: 480px) {
-		h1 {
-			font-size: 2rem;
-		}
-
-		.hero {
-			margin-bottom: 3rem;
-		}
 	}
 </style>

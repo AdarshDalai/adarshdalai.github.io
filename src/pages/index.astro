@@ -1,15 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../components/BaseLayout.astro';
+import PageSection from '../components/PageSection.astro';
 import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ProjectList from '../components/ProjectList.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
-import Divider from '../components/Divider.astro';
 
 // Your social links - customize these
 const socialLinks = [
@@ -21,7 +19,7 @@ const socialLinks = [
 
 // Fetch all projects from content collection
 const allProjects = await getCollection('projects', ({ data }) => {
-	return data.draft !== true; // Filter out drafts
+	return data.draft !== true;
 });
 
 // Sort by order (lower numbers first), then by title
@@ -35,17 +33,16 @@ const projects = allProjects.sort((a, b) => {
 
 <BaseLayout title="Adarsh Kumar Dalai" description="Software Developer Portfolio">
 	
-	<!-- Hero Section -->
-	<Hero 
-		name="Adarsh Kumar Dalai"
-		tagline="Developer. Builder. Petrolhead.<br/>I drive fast and code faster."
-		links={socialLinks}
-	/>
-	
-	<Divider />
+	<PageSection id="hero">
+		<Hero 
+			name="Adarsh Kumar Dalai"
+			tagline="Developer. Builder. Petrolhead.<br/>I drive fast and code faster."
+			links={socialLinks}
+		/>
+	</PageSection>
 
-	<!-- Projects Section -->
-	<Section title="Projects">
+	<PageSection id="projects">
+		<h2 class="section-title">Projects</h2>
 		<ProjectList>
 			{projects.map(async (project) => {
 				const { Content } = await project.render();
@@ -64,12 +61,10 @@ const projects = allProjects.sort((a, b) => {
 				);
 			})}
 		</ProjectList>
-	</Section>
-	
-	<Divider />
+	</PageSection>
 
-	<!-- About Section -->
-	<Section title="About">
+	<PageSection id="about">
+		<h2 class="section-title">About</h2>
 		<About>
 			<p>
 				I'm a software developer based in India. I enjoy building web applications 
@@ -79,19 +74,32 @@ const projects = allProjects.sort((a, b) => {
 				When I'm not coding, you can find me reading, exploring, or learning something new.
 			</p>
 		</About>
-	</Section>
-	
-	<Divider />
+	</PageSection>
 
-	<!-- Contact Section -->
-	<Section title="Get in touch">
+	<PageSection id="contact">
+		<h2 class="section-title">Get in touch</h2>
 		<Contact email="adarshkumardalai@gmail.com">
 			<p>Want to work together or just say hi?</p>
 		</Contact>
-	</Section>
+		<p class="copyright">© 2025 Adarsh Kumar Dalai</p>
+	</PageSection>
 	
-	<Footer />
-	
-	<!-- Modal for project details -->
 	<ProjectModal />
 </BaseLayout>
+
+<style>
+	.section-title {
+		font-size: clamp(1.75rem, 6vw, 3.5rem);
+		margin-bottom: clamp(1.5rem, 4vw, 3rem);
+		letter-spacing: -0.02em;
+	}
+
+	.copyright {
+		position: absolute;
+		bottom: clamp(1rem, 3vw, 2rem);
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: clamp(0.7rem, 1.5vw, 0.875rem);
+		color: #999;
+	}
+</style>

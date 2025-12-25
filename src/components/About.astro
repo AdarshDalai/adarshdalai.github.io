@@ -8,9 +8,10 @@
 
 <style>
 	.about :global(p) {
-		font-size: 0.95rem;
+		font-size: clamp(0.95rem, 2.5vw, 1.25rem);
 		color: #444;
-		margin-bottom: 1rem;
+		margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
+		line-height: 1.7;
 	}
 
 	.about :global(p:last-child) {
