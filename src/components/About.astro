@@ -1,0 +1,29 @@
+---
+// About section - pass content via slot
+---
+
+<div class="about">
+	<slot />
+</div>
+
+<style>
+	.about :global(p) {
+		font-size: 0.95rem;
+		color: #444;
+		margin-bottom: 1rem;
+	}
+
+	.about :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.about :global(a) {
+		color: #111;
+		border-bottom: 1px solid #111;
+		transition: opacity 0.2s;
+	}
+
+	.about :global(a:hover) {
+		opacity: 0.6;
+	}
+</style>

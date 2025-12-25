@@ -1,0 +1,37 @@
+---
+interface Props {
+	email?: string;
+}
+
+const { email } = Astro.props;
+---
+
+<div class="contact">
+	<slot />
+	{email && (
+		<p>
+			Drop me an email at <a href={`mailto:${email}`}>{email}</a>
+		</p>
+	)}
+</div>
+
+<style>
+	.contact :global(p) {
+		font-size: 0.95rem;
+		color: #444;
+		margin-bottom: 0.5rem;
+	}
+
+	.contact :global(a),
+	.contact a {
+		color: #111;
+		text-decoration: none;
+		border-bottom: 1px solid #111;
+		transition: opacity 0.2s;
+	}
+
+	.contact :global(a:hover),
+	.contact a:hover {
+		opacity: 0.6;
+	}
+</style>

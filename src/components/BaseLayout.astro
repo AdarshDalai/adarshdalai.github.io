@@ -1,0 +1,74 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = "Adarsh Kumar Dalai", 
+	description = "Software Developer Portfolio" 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+		<link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=BBH+Bogle&display=swap" rel="stylesheet" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		font-family: "BBH Bogle", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		background: #fff;
+		color: #111;
+		line-height: 1.6;
+	}
+
+	body {
+		min-height: 100vh;
+	}
+
+	main {
+		max-width: 680px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem;
+	}
+
+	/* Headings use BBH Bartle */
+	h1, h2, h3, h4, h5, h6 {
+		font-family: "BBH Bartle", -apple-system, BlinkMacSystemFont, sans-serif;
+		font-weight: 400;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	@media (max-width: 480px) {
+		main {
+			padding: 2.5rem 1.25rem;
+		}
+	}
+</style>

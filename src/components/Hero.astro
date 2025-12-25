@@ -1,0 +1,87 @@
+---
+interface Props {
+	greeting?: string;
+	name: string;
+	tagline: string;
+	links?: Array<{
+		label: string;
+		url: string;
+	}>;
+}
+
+const { 
+	greeting = "Hello world, I'm",
+	name,
+	tagline,
+	links = []
+} = Astro.props;
+---
+
+<header class="hero">
+	<p class="greeting">{greeting}</p>
+	<h1>{name}</h1>
+	<p class="tagline" set:html={tagline} />
+	{links.length > 0 && (
+		<div class="social-links">
+			{links.map(link => (
+				<a href={link.url} target="_blank" rel="noopener">{link.label}</a>
+			))}
+		</div>
+	)}
+</header>
+
+<style>
+	.hero {
+		margin-bottom: 4rem;
+	}
+
+	.greeting {
+		font-size: 0.875rem;
+		color: #666;
+		margin-bottom: 0.5rem;
+		font-weight: 400;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 1rem;
+		line-height: 1.2;
+	}
+
+	.tagline {
+		font-size: 1.125rem;
+		color: #444;
+		margin-bottom: 1.5rem;
+	}
+
+	.social-links {
+		display: flex;
+		gap: 1.25rem;
+		flex-wrap: wrap;
+	}
+
+	.social-links a {
+		color: #111;
+		text-decoration: none;
+		font-size: 0.9rem;
+		border-bottom: 1px solid #111;
+		padding-bottom: 2px;
+		transition: opacity 0.2s;
+	}
+
+	.social-links a:hover {
+		opacity: 0.6;
+	}
+
+	@media (max-width: 480px) {
+		h1 {
+			font-size: 2rem;
+		}
+
+		.hero {
+			margin-bottom: 3rem;
+		}
+	}
+</style>

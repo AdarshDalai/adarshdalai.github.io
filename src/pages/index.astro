@@ -1,16 +1,97 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../components/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectList from '../components/ProjectList.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import Divider from '../components/Divider.astro';
 
+// Your social links - customize these
+const socialLinks = [
+	{ label: "GitHub", url: "https://github.com/AdarshDalai" },
+	{ label: "LinkedIn", url: "https://linkedin.com/in/adarshkumardalai" },
+	{ label: "Twitter", url: "https://twitter.com/DalainotLama" },
+	{ label: "Email", url: "mailto:adarshkumardalai@gmail.com" },
+];
+
+// Fetch all projects from content collection
+const allProjects = await getCollection('projects', ({ data }) => {
+	return data.draft !== true; // Filter out drafts
+});
+
+// Sort by order (lower numbers first), then by title
+const projects = allProjects.sort((a, b) => {
+	if (a.data.order !== b.data.order) {
+		return a.data.order - b.data.order;
+	}
+	return a.data.title.localeCompare(b.data.title);
+});
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Adarsh Kumar Dalai" description="Software Developer Portfolio">
+	
+	<!-- Hero Section -->
+	<Hero 
+		name="Adarsh Kumar Dalai"
+		tagline="Developer. Builder. Petrolhead.<br/>I drive fast and code faster."
+		links={socialLinks}
+	/>
+	
+	<Divider />
+
+	<!-- Projects Section -->
+	<Section title="Projects">
+		<ProjectList>
+			{projects.map(async (project) => {
+				const { Content } = await project.render();
+				return (
+					<ProjectCard 
+						id={project.slug}
+						title={project.data.title}
+						subtitle={project.data.subtitle}
+						image={`/images/${project.data.image}`}
+						techStack={project.data.techStack}
+						githubUrl={project.data.githubUrl}
+						liveUrl={project.data.liveUrl}
+					>
+						<Content />
+					</ProjectCard>
+				);
+			})}
+		</ProjectList>
+	</Section>
+	
+	<Divider />
+
+	<!-- About Section -->
+	<Section title="About">
+		<About>
+			<p>
+				I'm a software developer based in India. I enjoy building web applications 
+				and exploring new technologies. Currently focused on full-stack development.
+			</p>
+			<p>
+				When I'm not coding, you can find me reading, exploring, or learning something new.
+			</p>
+		</About>
+	</Section>
+	
+	<Divider />
+
+	<!-- Contact Section -->
+	<Section title="Get in touch">
+		<Contact email="adarshkumardalai@gmail.com">
+			<p>Want to work together or just say hi?</p>
+		</Contact>
+	</Section>
+	
+	<Footer />
+	
+	<!-- Modal for project details -->
+	<ProjectModal />
+</BaseLayout>

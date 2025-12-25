@@ -1,0 +1,32 @@
+---
+interface Props {
+	href: string;
+	external?: boolean;
+}
+
+const { href, external = false } = Astro.props;
+---
+
+<a 
+	href={href} 
+	class="link-button"
+	target={external ? "_blank" : undefined}
+	rel={external ? "noopener" : undefined}
+>
+	<slot />
+</a>
+
+<style>
+	.link-button {
+		display: inline-block;
+		color: #111;
+		font-size: 0.9rem;
+		border-bottom: 1px solid #111;
+		padding-bottom: 2px;
+		transition: opacity 0.2s;
+	}
+
+	.link-button:hover {
+		opacity: 0.6;
+	}
+</style>

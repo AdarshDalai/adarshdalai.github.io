@@ -1,0 +1,234 @@
+---
+// Modal overlay for project details
+---
+
+<div id="project-modal" class="modal" aria-hidden="true">
+	<div class="modal-backdrop"></div>
+	<div class="modal-container">
+		<button class="modal-close" aria-label="Close modal">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+		</button>
+		<div class="modal-scroll">
+			<div id="modal-content"></div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.modal {
+		position: fixed;
+		inset: 0;
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s, visibility 0.3s;
+	}
+
+	.modal[aria-hidden="false"] {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.modal-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.85);
+	}
+
+	.modal-container {
+		position: relative;
+		width: 90%;
+		max-width: 700px;
+		max-height: 90vh;
+		background: #1a1a1a;
+		color: #fff;
+		overflow: hidden;
+		transform: translateY(20px);
+		transition: transform 0.3s;
+	}
+
+	.modal[aria-hidden="false"] .modal-container {
+		transform: translateY(0);
+	}
+
+	.modal-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		z-index: 10;
+		background: rgba(0, 0, 0, 0.5);
+		border: none;
+		color: #fff;
+		padding: 0.5rem;
+		cursor: pointer;
+		transition: background 0.2s;
+		border-radius: 50%;
+	}
+
+	.modal-close:hover {
+		background: rgba(0, 0, 0, 0.8);
+	}
+
+	.modal-scroll {
+		max-height: 90vh;
+		overflow-y: auto;
+	}
+
+	/* Modal content styles */
+	#modal-content :global(.modal-header) {
+		width: 100%;
+	}
+
+	#modal-content :global(.modal-image) {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	#modal-content :global(.modal-body) {
+		padding: 1.5rem;
+	}
+
+	#modal-content :global(.modal-title-row) {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	#modal-content :global(h2) {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	#modal-content :global(.modal-links) {
+		display: flex;
+		gap: 0.75rem;
+	}
+
+	#modal-content :global(.icon-link) {
+		color: #94a3b8;
+		transition: color 0.2s;
+	}
+
+	#modal-content :global(.icon-link:hover) {
+		color: #fff;
+	}
+
+	#modal-content :global(.modal-subtitle) {
+		font-size: 1rem;
+		color: #94a3b8;
+		margin: 0;
+	}
+
+	#modal-content :global(.tech-stack) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 1rem 0;
+	}
+
+	#modal-content :global(.tech-tag) {
+		font-size: 0.75rem;
+		color: #fff;
+		background: #4a5568;
+		padding: 0.25rem 0.75rem;
+		border-radius: 2px;
+	}
+
+	#modal-content :global(.modal-content) {
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid #333;
+	}
+
+	#modal-content :global(.modal-content p) {
+		font-size: 0.95rem;
+		line-height: 1.7;
+		color: #d1d5db;
+		margin-bottom: 1rem;
+	}
+
+	#modal-content :global(.modal-content a) {
+		color: #60a5fa;
+	}
+
+	#modal-content :global(.modal-content ul),
+	#modal-content :global(.modal-content ol) {
+		margin: 1rem 0;
+		padding-left: 1.5rem;
+		color: #d1d5db;
+	}
+
+	#modal-content :global(.modal-content li) {
+		margin-bottom: 0.5rem;
+	}
+
+	#modal-content :global(.modal-content h3) {
+		font-size: 1.1rem;
+		margin: 1.5rem 0 0.75rem;
+	}
+
+	#modal-content :global(.modal-content code) {
+		background: #2d3748;
+		padding: 0.2rem 0.4rem;
+		border-radius: 3px;
+		font-size: 0.85rem;
+	}
+
+	@media (max-width: 640px) {
+		.modal-container {
+			width: 100%;
+			max-height: 100vh;
+			height: 100vh;
+		}
+
+		.modal-scroll {
+			max-height: 100vh;
+		}
+	}
+</style>
+
+<script>
+	// Project modal functionality
+	document.addEventListener('DOMContentLoaded', () => {
+		const modal = document.getElementById('project-modal');
+		const modalContent = document.getElementById('modal-content');
+		const closeBtn = modal?.querySelector('.modal-close');
+		const backdrop = modal?.querySelector('.modal-backdrop');
+
+		// Open modal when clicking project card
+		document.querySelectorAll('.project-card .card-trigger').forEach(trigger => {
+			trigger.addEventListener('click', () => {
+				const card = trigger.closest('.project-card');
+				const details = card?.querySelector('[data-modal-content]');
+				
+				if (details && modalContent && modal) {
+					modalContent.innerHTML = details.innerHTML;
+					modal.setAttribute('aria-hidden', 'false');
+					document.body.style.overflow = 'hidden';
+				}
+			});
+		});
+
+		// Close modal
+		function closeModal() {
+			if (modal) {
+				modal.setAttribute('aria-hidden', 'true');
+				document.body.style.overflow = '';
+			}
+		}
+
+		closeBtn?.addEventListener('click', closeModal);
+		backdrop?.addEventListener('click', closeModal);
+		
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') closeModal();
+		});
+	});
+</script>
