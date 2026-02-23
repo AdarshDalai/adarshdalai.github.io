@@ -1,7 +1,7 @@
 ---
 title: "Kreeda"
 subtitle: "Kreeda is a digital scorekeeping and sports platform"
-image: "project-one.jpg"
+image: "Kreeda.jpg"
 techStack: ["React", "TypeScript", "Node.js"]
 githubUrl: "https://github.com/AdarshDalai/Kreeda-Web"
 liveUrl: "https://project-one.vercel.app"

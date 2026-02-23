@@ -1,7 +1,7 @@
 ---
 title: "Urjja"
 subtitle: "Vector Search Engine created using GO"
-image: "project-three.jpg"
+image: "Urjja.jpg"
 techStack: ["Astro", "Tailwind"]
 githubUrl: "https://github.com/AdarshDalai/Urjja"
 liveUrl: "https://project-three.vercel.app"

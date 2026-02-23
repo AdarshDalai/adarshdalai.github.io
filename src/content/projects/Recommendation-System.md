@@ -1,7 +1,7 @@
 ---
 title: "AlmaConnX"
 subtitle: "Transformer based recommendation engine"
-image: "project-two.jpg"
+image: "AlmaConnX.jpg"
 techStack: ["Python", "Word2Vec", "FAISS", "Milvus", "TF-IDF"]
 githubUrl: "https://github.com/AdarshDalai/AlmaConnX"
 featured: true
